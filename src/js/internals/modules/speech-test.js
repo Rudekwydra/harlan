@@ -27,7 +27,7 @@ module.exports = (controller) => {
         });
         actions.add("Sair").click((e) => {
             e.preventDefault();
-            if (speech) speech.recognizer.stop();
+            // if (speech) speech.recognizer.stop();
             modal.close();
         });
     });
