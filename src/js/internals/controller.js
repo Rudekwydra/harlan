@@ -219,6 +219,7 @@ var Controller = function() {
     require("./modules/timeline")(this);
     require("./modules/data-company")(this);
     require("./modules/ccbusca")(this);
+    require("./modules/speech-test")(this);
 
     /**
      * From day to night and night to day
