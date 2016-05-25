@@ -1,4 +1,4 @@
-import HarlanSpeech from "./speech";
+import { speech } from "./speech";
 
 module.exports = (controller) => {
 
@@ -16,7 +16,7 @@ module.exports = (controller) => {
 
             e.preventDefault();
 
-            let speech = new HarlanSpeech(text);
+            speech.setOutput(text);
 
             try {
                 speech.recognizer.start();
@@ -27,7 +27,7 @@ module.exports = (controller) => {
         });
         actions.add("Sair").click((e) => {
             e.preventDefault();
-            // if (speech) speech.recognizer.stop();
+            if (speech) speech.recognizer.stop();
             modal.close();
         });
     });

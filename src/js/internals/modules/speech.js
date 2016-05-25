@@ -1,22 +1,28 @@
-class HarlanSpeech {
-    constructor(input) {
-        this.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        this.SpeechRecognitionEvent = window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
+const   SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition,
+        SpeechRecognitionEvent = window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
-        this.recognizer = new this.SpeechRecognition();
+class HarlanSpeech {
+    constructor() {
+        this.recognizer = new SpeechRecognition();
         this.recognizer.continuous = true;
         this.recognizer.onresult = this.onResult;
-
-        this.recognizer.transcription = input;
+        this.recognizer.interimResults = true;
     }
-
     onResult(ev) {
-        for (let i = ev.resultIndex; i < event.results.length; i++) {
-            if (event.results[i].isFinal) {
-                this.transcription.val(event.results[i][0].transcript);
+        let content = "";
+        for (let i = ev.resultIndex; i < ev.results.length; i++) {
+            if (ev.results[i].isFinal) {
+                content = ev.results[i][0].transcript;
+            }
+            else {
+                content += ev.results[i][0].transcript;
             }
         }
+        this.transcription.val(content);
+    }
+    setOutput(output) {
+        this.recognizer.transcription = output;
     }
 }
 
-export default HarlanSpeech;
+export let speech = new HarlanSpeech();
